@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+	<section>
+		<h2>Wifi networks:</h2>
+		<ul>
+		{% for network in networks %}
+			<li>{{ network|safe }}</li>
+		{% endfor %}
+		</ul>
+	</section>
+{% endblock %}

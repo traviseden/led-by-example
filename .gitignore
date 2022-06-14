@@ -1,0 +1,13 @@
+.bash_history
+.bashrc
+.cache/
+.local/
+.nanorc
+.profile
+.python_history
+.selected_editor
+.ssh/
+__pycache__/
+display32x64/
+crypto/
+rplace/

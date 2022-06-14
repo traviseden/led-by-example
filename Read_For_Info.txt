@@ -1,0 +1,7 @@
+#This will edit the startup file so you can edit without the program running and restarting.
+crontab -e
+
+#crontab(cron(os) = time, tab = table, timetable)
+
+#the crontab schedules celeste-led.py to run at start and the file itself will/should reboot if errored.
+

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+	<head>
+		{% block head %}
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+		<title>{% block title %}{% endblock %} - led by example</title>
+		{% endblock %}
+
+		{% block style %}
+		{% endblock %}
+
+		{% block javascript %}
+		{% endblock %}
+	</head>
+	<body>
+		<main class="container">
+			<nav>
+				<ul>
+					<li><a href="/">LED</a></li>
+				</ul>
+				<ul>
+					<li><a href="/quotes">Quotes</a></li>
+					<li><a href="/wifi">Wifi</a></li>
+				</ul>
+			</nav>
+
+			{% block content %}
+				<p>all your base are belong to us</p>
+			{% endblock %}
+		</main>
+	</body>
+</html>
+

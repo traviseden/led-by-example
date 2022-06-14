@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block style %}
+	<style>
+		ul#quotes li span {
+			cursor: pointer;
+			color: red;
+		}
+	</style>
+{% endblock %}
+
+{% block content %}
+	<section>
+		<h2>Add quote</h2>
+		<form method="post">
+			<p><input type="text" name="quote" /></p>
+			<p><input type="submit" value="add quote" /></p>
+		</form>
+	</section>
+	<hr />
+	<section>
+		<h2>Quotes:</h2>
+		<ul id="quotes">
+			{% for quote in quotes %}
+				<li>
+					{{ quote|safe }}
+					(<span data-quote-index="{{ loop.index }}">DELETE</span>)
+				</li>
+			{% endfor %}
+		</ul>
+	</section>
+{% endblock %}
+
+{% block javascript %}
+	<script>
+		const onLoad = () => {
+			// we select the list itself rather than the items
+			// this adds a single listener
+			// we'll use target.closest to get the span clicked
+			// to get the quote index we use the span's dataset
+			// we also hack the quote itself from the html
+			// and use it in the confirmation
+			// fetch POSTs to /quotes/{line}
+			// it also passes line in the body which we are
+			// not using lol
+			document.querySelector("ul#quotes").addEventListener("click", (event) => {
+				const span = event.target.closest("span");
+				const line = span.dataset.quoteIndex;
+				const quote = span.parentElement.innerHTML.replace(/[\r\n\t]/g, "").split("(<span")[0];
+				if (window.confirm(`Are you sure you want to delete the following quote on line ${line}?\n\n${quote}`)) {
+					fetch(`/quotes/${line}`, {
+						method: "POST",
+						body: {line},
+					}).then((response) => {
+						span.parentElement.remove();
+					});
+				}
+			});
+
+		}
+		window.onload = onLoad;
+	</script>
+{% endblock %}
